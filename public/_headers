@@ -1,0 +1,19 @@
+# Security headers for every response on https://qagentext.netlify.app
+#
+# The site is static: its own HTML, CSS, images, video and captions, and no
+# script at all (the two JSON-LD blocks in index.html are data, which a browser
+# never executes, so script-src 'none' does not affect them). Nothing is loaded
+# from another origin; links to the Chrome Web Store and elsewhere are plain
+# navigation, which this policy does not restrict.
+#
+# Unlike the QExtract site there is no web app under this origin, so one
+# site-wide rule covers everything.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The 3.8 MB demo video and the screenshots change only with a new release.
+/assets/*
+  Cache-Control: public, max-age=86400

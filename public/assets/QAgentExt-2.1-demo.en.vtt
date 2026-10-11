@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.620
+Start with a real flow.
+
+2
+00:00:01.620 --> 00:00:07.324
+In Q Agent Extension, press Record, update the release name, and save the draft.
+
+3
+00:00:07.324 --> 00:00:11.479
+Stop recording, then add the expected result: Draft saved.
+
+4
+00:00:11.479 --> 00:00:14.577
+Review the captured steps before replaying.
+
+5
+00:00:15.578 --> 00:00:17.093
+Replay on a reset page.
+
+6
+00:00:17.093 --> 00:00:23.089
+Q Agent returns to the starting address, enters the recorded value, and clicks Save draft.
+
+7
+00:00:23.089 --> 00:00:25.790
+The assertion checks the actual outcome.
+
+8
+00:00:25.790 --> 00:00:28.755
+Save the passing test to your local library.
+
+9
+00:00:29.766 --> 00:00:32.075
+Choose a framework and copy the script.
+
+10
+00:00:32.075 --> 00:00:38.055
+This is the actual Playwright export, with navigation, recorded selectors, and the expected outcome.
+
+11
+00:00:38.055 --> 00:00:40.778
+We also run this copied script independently.
+
+12
+00:00:40.778 --> 00:00:44.923
+Review generated code before using it in your own automation project.
+
+13
+00:00:45.939 --> 00:00:47.640
+A passing click is not enough.
+
+14
+00:00:47.640 --> 00:00:52.798
+Here we deliberately expect an approval message that the sample application does not show.
+
+15
+00:00:52.798 --> 00:00:53.705
+The test fails.
+
+16
+00:00:53.705 --> 00:00:59.431
+Review the assertion and the evidence in the side panel before changing the test or the application.
+
+17
+00:01:00.442 --> 00:01:02.032
+Run saved tests together.
+
+18
+00:01:02.032 --> 00:01:06.865
+This local example replays the recorded draft flow and checks a sample API.
+
+19
+00:01:06.865 --> 00:01:10.808
+Review the outcome of each case and the overall quality gate.
+
+20
+00:01:10.808 --> 00:01:14.369
+These are real execution results, not a mock interface.

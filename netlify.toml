@@ -1,0 +1,6 @@
+# QAgentExt's website: https://qagentext.netlify.app
+# Static files, committed as built: Netlify runs no build, it serves public/ as it is.
+# Security headers live in public/_headers.
+[build]
+  publish = "public"
+  command = ""

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qagentext.netlify.app/sitemap.xml

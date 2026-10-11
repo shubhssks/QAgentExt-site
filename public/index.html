@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QAgentExt | Record, Replay and Export Browser Tests</title>
+  <meta name="description" content="Record browser flows, replay checks, investigate failures and export automation starter code from Chrome's side panel. New in 2.2: run iOS app flows through Appium (preview).">
+  <meta name="theme-color" content="#101416">
+  <meta name="author" content="Shubham Singh">
+  <link rel="canonical" href="https://qagentext.netlify.app/">
+  <link rel="icon" type="image/png" href="/assets/icon-128.png">
+  <link rel="stylesheet" href="/style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="QAgentExt">
+  <meta property="og:title" content="QAgentExt | Record, Replay and Export Browser Tests">
+  <meta property="og:description" content="Turn browser workflows into reusable QA checks. Watch a real test get recorded, replayed, debugged and exported.">
+  <meta property="og:url" content="https://qagentext.netlify.app/">
+  <meta property="og:image" content="https://qagentext.netlify.app/assets/video-thumbnail.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta property="og:image:alt" content="QAgentExt with an actual passing test in Chrome's side panel">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ShubixConnect">
+  <meta name="twitter:title" content="QAgentExt | Record, Replay and Export Browser Tests">
+  <meta name="twitter:description" content="Reusable browser tests from Chrome's side panel. Watch the demo.">
+  <meta name="twitter:image" content="https://qagentext.netlify.app/assets/video-thumbnail.png">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"QAgentExt",
+    "applicationCategory":"DeveloperApplication",
+    "applicationSubCategory":"Browser Extension",
+    "operatingSystem":"Google Chrome",
+    "softwareVersion":"2.2.0",
+    "url":"https://qagentext.netlify.app/",
+    "installUrl":"https://chromewebstore.google.com/detail/fmabdhbonhmnomjogiehbhadalondhch",
+    "image":"https://qagentext.netlify.app/assets/video-thumbnail.png",
+    "description":"Record and replay browser flows, run saved regression checks, investigate failures and export automation starter code from Chrome's side panel. Run iOS app flows through Appium (preview).",
+    "author":{"@type":"Person","name":"Shubham Singh"},
+    "publisher":{"@type":"Organization","name":"Shubix","url":"https://shubix.netlify.app/"},
+    "featureList":["Recorded browser flows","Saved tests and regression runs","Failure evidence","Playwright and Cypress starter code","Accessibility and API checks","iOS app flows through Appium (preview)"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Do I need an account or an AI service?","acceptedAnswer":{"@type":"Answer","text":"Core testing runs in Chrome without a QAgentExt account or an external AI service. Your application may still require its own sign-in and network connection."}},
+      {"@type":"Question","name":"Can I use the generated code in my automation project?","acceptedAnswer":{"@type":"Answer","text":"Yes, after review and setup. Export coverage varies by action and framework. When a test includes a step a framework cannot express, the exported script stops with an explicit error instead of silently skipping it; those steps need manual implementation. The demo's copied Playwright flow was run independently."}},
+      {"@type":"Question","name":"Can QAgentExt test iPhone and iPad apps?","acceptedAnswer":{"@type":"Answer","text":"Yes, as a preview in version 2.2. Install QAgentExt in Chrome on a Mac that runs Appium with the XCUITest driver, then use the iOS tab to run a flow on a simulator or a connected device. You install and start Appium yourself."}},
+      {"@type":"Question","name":"Does QAgentExt send data over the internet?","acceptedAnswer":{"@type":"Answer","text":"Core processing and saved tests are local. Page actions and API tests contact the applications you choose. Optional monitor webhooks send run summaries, the iOS tab sends commands to the Appium server address you enter, and the extension panel requests Google Fonts. Reports can contain application data. See the privacy policy for details."}},
+      {"@type":"Question","name":"Does inspection replace a real screen reader?","acceptedAnswer":{"@type":"Answer","text":"No. Semantic inspection helps you examine roles, accessible names and states. It does not reproduce a complete NVDA, JAWS or VoiceOver session or establish accessibility conformance."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand brand--product" href="/"><img src="/assets/icon-128.png" width="28" height="28" alt="">QAgentExt</a>
+      <nav class="site-nav" aria-label="Product navigation">
+        <a href="#demo">Demo</a>
+        <a href="#features">Features</a>
+        <a href="#ios">iOS</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="mailto:shubix.connect@gmail.com">Support</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="product-name">
+      <p class="eyebrow">Browser testing &middot; Chrome extension</p>
+      <div class="product-name">
+        <img src="/assets/icon-128.png" width="64" height="64" alt="">
+        <h1 id="product-name">QAgentExt</h1>
+      </div>
+      <p class="lede">Record a browser flow. Replay it as a test. Turn the result into your next automation script, all from Chrome's side panel.</p>
+      <div class="actions">
+        <a class="button" href="https://chromewebstore.google.com/detail/fmabdhbonhmnomjogiehbhadalondhch" target="_blank" rel="noopener">Add to Chrome</a>
+        <a href="#demo">Watch the demo</a>
+      </div>
+      <figure class="hero-proof">
+        <a href="/assets/02-replay.png"><img src="/assets/02-replay.png" width="1280" height="800" fetchpriority="high" alt="A recorded release form replayed successfully, with its actual passing result in QAgentExt"></a>
+        <figcaption>Actual QAgentExt, captured in version 2.1 with a local sample application. Open the image for full detail.</figcaption>
+      </figure>
+    </section>
+
+    <section class="band" aria-labelledby="workflow-heading">
+      <div class="wrap">
+        <p class="eyebrow">From a manual check to a repeatable test</p>
+        <h2 id="workflow-heading">Keep the flow. Check the outcome.</h2>
+        <p class="intro">Give your everyday browser checks a repeatable path, an expected result and evidence you can review when something changes.</p>
+        <ol class="workflow">
+          <li><span class="step-number">01 / Record</span><h3>Capture the interaction</h3><p>Record a short flow, stop and review the steps. Add an assertion such as confirmation text appearing after a form is saved.</p></li>
+          <li><span class="step-number">02 / Replay</span><h3>Verify what happened</h3><p>Run the steps on your target page, inspect the result and save useful checks to your library. A click alone does not prove success.</p></li>
+          <li><span class="step-number">03 / Export</span><h3>Move toward automation</h3><p>Copy Playwright or Cypress starter code. Review the generated script, install its dependencies and adapt it to your project.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band" id="demo" aria-labelledby="demo-heading">
+      <div class="wrap">
+        <p class="eyebrow">75-second walkthrough</p>
+        <h2 id="demo-heading">Watch a real test take shape</h2>
+        <p class="intro">Record a form, replay it, export the code, investigate a failed assertion and run two saved checks. The copied Playwright script was also executed independently.</p>
+        <p class="release-note">Recorded with version 2.1. The current release is 2.2; the Chrome Web Store listing shows the version available to install.</p>
+        <figure class="demo">
+          <video controls playsinline preload="none" poster="/assets/video-thumbnail.png" width="1920" height="1080" aria-label="QAgentExt record, replay, debug and export demo">
+            <source src="/assets/QAgentExt-2.1-demo.mp4" type="video/mp4">
+            <track kind="captions" src="/assets/QAgentExt-2.1-demo.en.vtt" srclang="en" label="English" default>
+            <a href="/assets/QAgentExt-2.1-demo.mp4">Download the demo video</a>
+          </video>
+          <figcaption>Local sample application and dummy data. Narrated in English with captions.</figcaption>
+        </figure>
+        <details class="transcript">
+          <summary>Read the demo transcript</summary>
+          <ol>
+            <li><strong>Record:</strong> Start with a real flow. In Q Agent Extension, press Record, update the release name, and save the draft. Stop recording, then add the expected result: Draft saved. Review the captured steps before replaying.</li>
+            <li><strong>Replay:</strong> Replay on a reset page. Q Agent returns to the starting address, enters the recorded value, and clicks Save draft. The assertion checks the actual outcome. Save the passing test to your local library.</li>
+            <li><strong>Export:</strong> Choose a framework and copy the script. This is the actual Playwright export, with navigation, recorded selectors, and the expected outcome. We also run this copied script independently. Review generated code before using it in your own automation project.</li>
+            <li><strong>Debug:</strong> A passing click is not enough. Here we deliberately expect an approval message that the sample application does not show. The test fails. Review the assertion and the evidence in the side panel before changing the test or the application.</li>
+            <li><strong>Run a suite:</strong> Run saved tests together. This local example replays the recorded draft flow and checks a sample API. Review the outcome of each case and the overall quality gate. These are real execution results, not a mock interface.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <section class="band" id="features" aria-labelledby="features-heading">
+      <div class="wrap">
+        <h2 id="features-heading">A testing workspace beside your application</h2>
+        <div class="features">
+          <article><h3>A reusable regression library</h3><p>Save tests, organize suites and run checks sequentially. Use CSV data and environment profiles, inspect each outcome and rerun selected failures.</p></article>
+          <article><h3>Evidence for the failed step</h3><p>Review the expected outcome, available screenshots, console messages and network diagnostics. Export reports and reproduction evidence for your team.</p></article>
+          <article><h3>Live contrast inspection</h3><p>Hover over an element for its contrast ratio and text thresholds. Feedback updates as styles change; click to keep the detailed report.</p></article>
+          <article><h3>Screen-reader semantics</h3><p>Inspect roles, names, descriptions and states using the pointer or keyboard. Inspection modes have active states and Escape cleanup.</p></article>
+          <article><h3>Page and API checks</h3><p>Combine supported plain-language commands and assertions with API requests, response checks, visual comparisons and accessibility diagnostics.</p></article>
+          <article><h3>Continue in CI</h3><p>The separately installed companion CLI runs supported regression plans in headless Chromium and exports JSON or JUnit results for your pipeline.</p></article>
+        </div>
+        <p class="fine-print">Sequential tests share browser state. Generated scripts need review, and export support varies by action and framework. Automated accessibility and security checks provide diagnostic findings; manual review is still needed.</p>
+      </div>
+    </section>
+
+    <section class="band" id="ios" aria-labelledby="ios-heading">
+      <div class="wrap">
+        <p class="eyebrow">New in 2.2 &middot; Preview</p>
+        <h2 id="ios-heading">Run the same idea on an iPhone or iPad</h2>
+        <p class="intro">Install QAgentExt in Chrome on a Mac that runs Appium, open the iOS tab in the side panel, and run a flow on a simulator or a connected device. Test any app by its bundle id, or a website in mobile Safari.</p>
+        <div class="features">
+          <article><h3>Flows in plain text</h3><p>One step per line: <code>launch app com.apple.Preferences</code>, <code>tap "General"</code>, <code>expect text "About" visible</code>. Problems are reported by line before anything touches the device.</p></article>
+          <article><h3>Real touch, real evidence</h3><p>Swipes, long presses, drags and two-finger pinches are sent as touch gestures. A failed step keeps a screenshot and the app's element tree, and the run downloads as JSON or JUnit.</p></article>
+          <article><h3>Secrets stay out of results</h3><p>A secret is typed in for the session only. It is never saved, exported or shown in results.</p></article>
+          <article><h3>The same plan in CI</h3><p>A flow exports as a portable plan that the companion CLI runs against the same Appium server, with clear exit codes for your pipeline.</p></article>
+        </div>
+        <p class="fine-print">You install and start Appium yourself; it needs macOS and Xcode. QAgentExt connects to the Appium address you enter, by default the same Mac. The iOS tab is a preview: check results on your own devices before relying on them.</p>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="screenshots-heading">
+      <div class="wrap">
+        <h2 id="screenshots-heading">Follow the result from draft to suite</h2>
+        <p class="intro">Screenshots captured in version 2.1. Select an image to inspect the full view.</p>
+        <div class="screenshots">
+          <figure><a href="/assets/01-record.png"><img src="/assets/01-record.png" loading="lazy" width="1280" height="800" alt="Recorded navigation, input, click and expected-text assertion ready for review"></a><figcaption>Review captured steps and the expected result.</figcaption></figure>
+          <figure><a href="/assets/03-debug.png"><img src="/assets/03-debug.png" loading="lazy" width="1280" height="800" alt="A deliberate text assertion failure with the validation-mismatch explanation"></a><figcaption>Understand which expectation failed.</figcaption></figure>
+          <figure><a href="/assets/04-export.png"><img src="/assets/04-export.png" loading="lazy" width="1280" height="800" alt="Verbatim Playwright code copied from the passing recorded test"></a><figcaption>Take reviewed starter code into your project.</figcaption></figure>
+          <figure><a href="/assets/05-regression.png"><img src="/assets/05-regression.png" loading="lazy" width="1280" height="800" alt="Two saved tests completed with a passing regression quality gate"></a><figcaption>Run saved checks and review every outcome.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="faq-heading">
+      <div class="wrap faq">
+        <h2 id="faq-heading">Before your first test</h2>
+        <details><summary>Do I need an account or an AI service?</summary><p>Core testing runs in Chrome without a QAgentExt account or an external AI service. Your application may still require its own sign-in and network connection.</p></details>
+        <details><summary>Can I use the generated code in my automation project?</summary><p>Yes, after review and setup. Export coverage varies by action and framework. When a test includes a step a framework cannot express, the exported script stops with an explicit error instead of silently skipping it; those steps need manual implementation. The demo's copied Playwright flow was run independently.</p></details>
+        <details><summary>Can QAgentExt test iPhone and iPad apps?</summary><p>Yes, as a preview in version 2.2. Install QAgentExt in Chrome on a Mac that runs <a href="https://appium.io" target="_blank" rel="noopener">Appium</a> with the XCUITest driver, then use the iOS tab to run a flow on a simulator or a connected device. You install and start Appium yourself; the extension cannot start programs. The first run on a new simulator can take a few minutes while Appium prepares it.</p></details>
+        <details><summary>Does QAgentExt send data over the internet?</summary><p>Core processing and saved tests are local. Page actions and API tests contact the applications you choose. Optional monitor webhooks send run summaries, the iOS tab sends commands to the Appium server address you enter, and the extension panel requests Google Fonts. Reports can contain application data. See the <a href="/privacy/">privacy policy</a> for details.</p></details>
+        <details><summary>Does inspection replace a real screen reader?</summary><p>No. Semantic inspection helps you examine roles, accessible names and states. It does not reproduce a complete NVDA, JAWS or VoiceOver session or establish accessibility conformance.</p></details>
+        <details><summary>Can I test an internal application?</summary><p>Use Chrome on an application you can access and are authorized to test, including permitted internal environments. The application still needs its own connectivity and permissions. Chrome-protected pages and some embedded content cannot be inspected.</p></details>
+        <details><summary>How do I start, or report a problem?</summary><p>Open a safe test page and the QAgentExt side panel, record a short flow, add an expected result and replay it with dummy data. For help, email <a href="mailto:shubix.connect@gmail.com">shubix.connect@gmail.com</a> with the extension version and reproduction steps. Review screenshots and exported files for sensitive data before sharing.</p></details>
+      </div>
+    </section>
+    <section class="band" aria-labelledby="install-heading">
+      <div class="wrap">
+        <h2 id="install-heading">Start with one useful check</h2>
+        <p class="intro">Choose a flow you repeat often, define its expected outcome and keep it in your test library.</p>
+        <div class="actions"><a class="button" href="https://chromewebstore.google.com/detail/fmabdhbonhmnomjogiehbhadalondhch" target="_blank" rel="noopener">Get QAgentExt for Chrome</a><a href="/privacy/">Read the privacy policy</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><span class="copyright">QAgentExt by Shubix &middot; Shubham Singh</span><a href="https://shubix.netlify.app/">More from Shubix</a><a href="/privacy/">Privacy policy</a><a href="mailto:shubix.connect@gmail.com">Contact</a></div></footer>
+</body>
+</html>

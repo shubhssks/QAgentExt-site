@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QAgentExt Privacy Policy</title>
+  <meta name="description" content="How QAgentExt accesses page content, stores tests and evidence locally, and handles API requests, optional webhooks, the Appium connection for iOS runs, fonts and exported reports.">
+  <meta name="theme-color" content="#101416">
+  <link rel="canonical" href="https://qagentext.netlify.app/privacy/">
+  <link rel="icon" type="image/png" href="/assets/icon-128.png">
+  <link rel="stylesheet" href="/style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="QAgentExt">
+  <meta property="og:title" content="QAgentExt Privacy Policy">
+  <meta property="og:description" content="Page access, local test storage, network requests and your data controls in QAgentExt.">
+  <meta property="og:url" content="https://qagentext.netlify.app/privacy/">
+  <meta property="og:image" content="https://qagentext.netlify.app/assets/video-thumbnail.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap"><a class="brand brand--product" href="/"><img src="/assets/icon-128.png" width="28" height="28" alt="">QAgentExt</a><nav class="site-nav" aria-label="Policy navigation"><a href="/">About QAgentExt</a><a href="https://shubix.netlify.app/">Shubix</a></nav></div></header>
+  <main id="main" class="wrap policy">
+    <h1>QAgentExt Privacy Policy</h1>
+    <p class="meta">Updated 11 October 2026 &middot; QAgentExt for Google Chrome, version 2.2</p>
+    <p>QAgentExt is a browser testing extension made by Shubix, developed by Shubham Singh. Core testing and saved test data are processed in your browser. Testing a website can send requests to that website, and some optional features send information to destinations you choose. This policy describes that access, storage and sharing.</p>
+    <p>Questions about your data: <a href="mailto:shubix.connect@gmail.com">shubix.connect@gmail.com</a>.</p>
+    <nav class="policy-nav" aria-label="On this page"><a href="#access">Data access</a><a href="#storage">Local storage</a><a href="#network">Network requests</a><a href="#ios">iOS device runs</a><a href="#permissions">Permissions</a><a href="#control">Your controls</a></nav>
+
+    <h2 id="access">Data the extension accesses</h2>
+    <p>To find controls, execute tests and explain results, QAgentExt can read page content, element attributes, accessible names, current URLs, tab information and frame structure. Recording captures interactions and entered values. Audits and diagnostics can inspect console messages, network request and response information, and the rendered page; screenshots may include visible application data.</p>
+    <p>The extension declares access to <code>&lt;all_urls&gt;</code> and loads content scripts automatically on matching pages and frames. Those scripts may be present before you start a test. Testing, recording and scheduled monitoring use this access to carry out the workflows you configure. Chrome restricts access to certain protected pages.</p>
+    <p>When you run a flow in the iOS tab, the extension also receives what the Appium server you connect to returns: command results, screenshots of the device screen and the app's element tree.</p>
+    <p>Test commands, recordings, profiles, session snapshots and diagnostics can contain personal information, credentials or other application data. Password masking in a preview or export does not ensure that every sensitive value has been removed.</p>
+
+    <h2 id="storage">What is stored locally</h2>
+    <p>QAgentExt uses Chrome extension local and session storage for its operation. Depending on the features you use, this includes:</p>
+    <ul>
+      <li>Recorded drafts, saved tests, reusable blocks, suites, imported data and environment profiles.</li>
+      <li>Run history, results, diagnostic evidence, screenshots and visual or accessibility baselines.</li>
+      <li>Selector memory, element fingerprints and preferences.</li>
+      <li>Session snapshots, which may include page storage values and authentication-related data.</li>
+      <li>Monitor definitions, schedules, optional webhook URLs and monitor history.</li>
+      <li>iOS tab settings (the Appium server address, device, iOS version, app bundle id and UDID you enter), saved iOS flows and a short list of recent iOS run outcomes. Screenshots and element trees from an iOS run are kept in memory for that run and are written to a file only if you download them.</li>
+      <li>Temporary execution and inspection state used to reconnect the side panel or recover a run.</li>
+    </ul>
+    <p><strong>Secret values typed into the iOS tab are not stored.</strong> They are kept in memory while the side panel is open, and are never written to storage, included in exported plans or run files, or shown in results.</p>
+    <p>The extension does not use Chrome sync storage to synchronize this data to your Google account. Saved information remains until you delete it, remove the extension or the relevant history retention limits replace older entries. Exported files are stored wherever you save them.</p>
+
+    <h2 id="network">When information leaves the browser</h2>
+    <h3>Applications and APIs you test</h3>
+    <p>Navigation, clicks, typing and form submissions can cause the application under test to send its normal requests. Explicit API steps send the URL, headers and body you configure to that endpoint. Requests can use the application's browser session according to browser rules. These actions may change server data, and the destination's privacy policy applies.</p>
+    <h3>Optional monitor webhooks</h3>
+    <p>A monitor sends a webhook only when you configure its URL. The summary includes schedule and folder identifiers, pass/fail/total counts, status and timestamp, plus an accessibility score when available. This summary does not include screenshots or full page content, but identifiers can still reveal information about your test organization. The destination is your chosen service, such as your own server or a messaging webhook provider.</p>
+    <p>Optional background monitoring opens the configured page in an inactive tab, runs your saved checks and closes that tab when the run finishes. Loading that page and executing its tests can make application requests. Remove the webhook URL to stop summaries, and disable or delete the monitor to stop future scheduled runs.</p>
+    <h3 id="ios">Appium server for iOS device runs (version 2.2, preview)</h3>
+    <p>The iOS tab drives an iPhone, iPad or simulator through an <a href="https://appium.io" target="_blank" rel="noopener">Appium</a> server that you install and start yourself, normally on the same Mac at <code>http://127.0.0.1:4723</code>, which is the default. QAgentExt does not install, start or include Appium.</p>
+    <p>Only when you press Check or Run on device, the side panel sends standard WebDriver requests to the server address shown in the iOS tab. They contain the target you entered (device name, iOS version, UDID, app bundle id or Safari) and the flow's commands, such as find this element, tap, type this text or take a screenshot. Text that a flow types, including the value of a secret, is sent so the device can type it.</p>
+    <p>Nothing is sent to Shubix or any other party. If you enter the address of another machine, that machine's Appium server receives the same requests, so use only servers you control or trust.</p>
+    <h3>Fonts</h3>
+    <p>The extension panel loads font styles and files from <code>fonts.googleapis.com</code> and <code>fonts.gstatic.com</code>. Google receives ordinary network request information, including your IP address and request metadata. Test commands and reports are not included in those font requests. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a>.</p>
+    <h3>Exports, issue links and support</h3>
+    <p>Reports, screenshots, scripts, test libraries and bug packs can contain application data. You decide where to save or share them. Opening a generated GitHub or Jira issue link sends its prefilled URL content to that provider; review it before opening or submitting. Files you email to support are received by the support email provider and Shubix. Send only the information needed to investigate your request.</p>
+    <p>Core testing requires no QAgentExt account or external AI service. The extension does not automatically upload your test library or run reports to a Shubix backend for processing, and does not include an advertising or analytics service. We do not sell test data or use it for advertising. Support information you choose to send is used to respond to and investigate your request.</p>
+
+    <h2 id="permissions">Permissions and their purpose</h2>
+    <table>
+      <caption>Permissions declared by the extension</caption>
+      <thead><tr><th scope="col">Permission</th><th scope="col">Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>sidePanel</code></td><td>Display the primary testing workspace beside the page.</td></tr>
+        <tr><td><code>activeTab</code></td><td>Support page access and capture following a user gesture.</td></tr>
+        <tr><td><code>scripting</code></td><td>Inject testing code, audits and configured page-context tools.</td></tr>
+        <tr><td><code>tabs</code></td><td>Read target tab information and manage test or monitor tabs.</td></tr>
+        <tr><td><code>storage</code></td><td>Store tests, preferences, evidence and execution state.</td></tr>
+        <tr><td><code>webNavigation</code></td><td>Inspect frame structure for routing page actions.</td></tr>
+        <tr><td><code>notifications</code></td><td>Display supported test and monitor completion notices.</td></tr>
+        <tr><td><code>alarms</code></td><td>Schedule monitors configured in the extension.</td></tr>
+        <tr><td><code>&lt;all_urls&gt;</code></td><td>Access authorized test applications on different sites, including matching frames and configured requests, and reach the Appium server address you enter for iOS runs.</td></tr>
+      </tbody>
+    </table>
+    <p>Site access is broad and is not limited to clicking Record. You can review or restrict site access in Chrome's extension settings; testing or monitoring on restricted sites may then stop working.</p>
+
+    <h2 id="control">Your controls and deletion</h2>
+    <ul>
+      <li>Use the library and profile controls to remove saved items, and the Dashboard storage controls to clear the categories they expose.</li>
+      <li>Delete saved iOS flows in the iOS tab. Closing the side panel discards any secrets typed there.</li>
+      <li>Disable or delete scheduled monitors before clearing their stored data. Remove a monitor's webhook URL to stop future summaries.</li>
+      <li>Removing QAgentExt from Chrome removes its extension storage. Downloaded files, data in the tested application and information already shared with another service are managed separately.</li>
+      <li>Stopping a run cannot undo a request or action already received by your application or device.</li>
+      <li>Contact <a href="mailto:shubix.connect@gmail.com">shubix.connect@gmail.com</a> about information you previously sent to support.</li>
+    </ul>
+
+    <h2>This website</h2>
+    <p>This site serves its own images, video, captions and styles. Playing the demo requests the video from the site host. The site adds no analytics scripts or embedded third-party video player. The hosting provider, Netlify, receives ordinary web requests and may process connection and access-log information under its <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">privacy policy</a>. Following a Chrome Web Store, social, email or other external link is subject to that destination's practices.</p>
+    <p>Until October 2026 this policy was published at <code>shubix.netlify.app/qagentext/privacy/</code>; that address now leads here.</p>
+
+    <h2>Policy updates</h2>
+    <p>We will update this page and its date when the described data handling changes. The Chrome Web Store listing identifies the extension version available to install.</p>
+  </main>
+  <footer class="footer"><div class="wrap"><span class="copyright">QAgentExt by Shubix</span><a href="/">About QAgentExt</a><a href="https://shubix.netlify.app/">More from Shubix</a><a href="mailto:shubix.connect@gmail.com">Contact</a></div></footer>
+</body>
+</html>
