@@ -14,6 +14,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# The CLI package is a gzip tarball; name the type so every browser offers a download.
+/cli/*.tgz
+  Content-Type: application/gzip
+  Content-Disposition: attachment
+
 # The 3.8 MB demo video and the screenshots change only with a new release.
 /assets/*
   Cache-Control: public, max-age=86400

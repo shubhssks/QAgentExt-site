@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QAgentExt CLI | Run tests in CI</title>
+  <meta name="description" content="Install the QAgentExt companion CLI to run saved tests, regression plans and iOS flows headlessly in CI, with the same engine as the Chrome extension.">
+  <meta name="theme-color" content="#101416">
+  <link rel="canonical" href="https://qagentext.netlify.app/cli/">
+  <link rel="icon" type="image/png" href="/assets/icon-128.png">
+  <link rel="stylesheet" href="/style.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="QAgentExt">
+  <meta property="og:title" content="QAgentExt CLI">
+  <meta property="og:description" content="Run QAgentExt tests, regression plans and iOS flows in CI from one installable package.">
+  <meta property="og:url" content="https://qagentext.netlify.app/cli/">
+  <meta property="og:image" content="https://qagentext.netlify.app/assets/video-thumbnail.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap"><a class="brand brand--product" href="/"><img src="/assets/icon-128.png" width="28" height="28" alt="">QAgentExt</a><nav class="site-nav" aria-label="Site navigation"><a href="/">About QAgentExt</a><a href="/privacy/">Privacy</a><a href="mailto:shubix.connect@gmail.com">Support</a></nav></div></header>
+  <main id="main" class="wrap policy">
+    <h1>The QAgentExt CLI</h1>
+    <p class="meta">Version 2.3.0 &middot; one npm package &middot; no account, no repository</p>
+    <p>The companion command line runs the tests you save in the extension headlessly in CI, with the same engine, and runs exported iOS flows through an Appium server. It bundles the production extension, so it needs no download beyond Chromium.</p>
+
+    <h2 id="install">Install</h2>
+    <p>Node.js 18 or later. The second command downloads the Chromium build that can load extensions (the default headless shell cannot).</p>
+    <pre><code>npm install -g https://qagentext.netlify.app/cli/qagentext-cli-2.3.0.tgz
+npx playwright-core install chromium
+qagent --version</code></pre>
+    <p><a href="/cli/qagentext-cli-2.3.0.tgz" download>qagentext-cli-2.3.0.tgz</a> &middot; SHA-256 <code id="sha">5a2c37e88fc3c7d020061560e34ade65f6f71dd43a8b3d271e93bc695478fafc</code></p>
+    <p>The package contains the same code the Chrome Web Store serves. Its only dependency is <code>playwright-core</code>, pinned to the version it was tested with.</p>
+
+    <h2 id="run">Run a saved test</h2>
+    <p>Export a test from the extension's library, then:</p>
+    <pre><code>qagent run my-test.json --url https://staging.example.com -o test-results</code></pre>
+    <p>Writes a JUnit report. Accessibility findings gate the build by default (<code>--a11y blocking</code>); <code>--a11y threshold --a11y-min-score 95</code> gates on a conformance score, <code>--a11y off</code> disables the gate, and <code>--acr</code> adds an ACR/VPAT-style report.</p>
+
+    <h2 id="plan">Run a regression plan</h2>
+    <p>In the extension, open Library &rarr; Runs &rarr; Export plan. Then:</p>
+    <pre><code>qagent plan qagent-plan.json --url https://staging.example.com -o test-results
+qagent plan qagent-plan.json --retries 1 --max-failures 3 --tag smoke</code></pre>
+    <p>Retries, failure limits, tag and name selection, environments and CSV data sets behave as they do in the extension. Exit code 0 means the quality gate passed.</p>
+
+    <h2 id="ios">Run an iOS flow (preview)</h2>
+    <p>Export a flow from the extension's iOS tab (Export plan) and point the CLI at an Appium server with the XCUITest driver. The server needs macOS and Xcode; the CLI can run anywhere that reaches it.</p>
+    <pre><code>QAGENT_IOS_APPIUM_URL=http://127.0.0.1:4723 qagent adapter run ios-appium my-flow.plan.json --target sim.target.json -o test-results
+qagent adapter run ios-appium my-flow.plan.json --dry-run</code></pre>
+    <p>The target file holds the Appium capabilities, for example <code>{ "platformName": "iOS", "appium:automationName": "XCUITest", "appium:deviceName": "iPhone 15", "appium:bundleId": "com.example.app" }</code>. Secrets declared in a flow are read from <code>QAGENT_SECRET_&lt;NAME&gt;</code> and masked in every output. On failure the output folder gains a screenshot and the element tree.</p>
+    <table>
+      <caption>Exit codes of <code>qagent adapter run</code></caption>
+      <thead><tr><th scope="col">Code</th><th scope="col">Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Pass, or flaky under <code>--soft-failures flaky</code></td></tr>
+        <tr><td>1</td><td>Fail, setup failure, interrupted, or flaky under the default <code>--soft-failures fail</code></td></tr>
+        <tr><td>2</td><td>Cannot run here: no Appium server, server down, bad target profile</td></tr>
+        <tr><td>3</td><td>The flow was refused before anything started</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="ci">In a pipeline</h2>
+    <p>A GitHub Actions job installs the package and Chromium, then runs a plan:</p>
+    <pre><code>- uses: actions/setup-node@v4
+  with: { node-version: '20' }
+- run: npm install -g https://qagentext.netlify.app/cli/qagentext-cli-2.3.0.tgz
+- run: npx playwright-core install --with-deps chromium
+- run: qagent plan qagent-plan.json --url ${{ vars.STAGING_URL }} -o test-results
+- uses: actions/upload-artifact@v4
+  if: always()
+  with: { name: qagent-results, path: test-results }</code></pre>
+    <p>For iOS on a macOS runner (boot a simulator, start Appium, run exported flows), the same steps apply with Appium installed on the runner; the first session on a fresh simulator takes a few minutes while Appium installs its helper app.</p>
+
+    <h2>Privacy</h2>
+    <p>The CLI runs locally and contacts only the pages, APIs and Appium server you name. Downloading this package from this site is an ordinary web request to the host, Netlify. See the <a href="/privacy/">privacy policy</a>.</p>
+  </main>
+  <footer class="footer"><div class="wrap"><span class="copyright">QAgentExt by Shubix</span><a href="/">About QAgentExt</a><a href="https://shubix.netlify.app/">More from Shubix</a><a href="mailto:shubix.connect@gmail.com">Contact</a></div></footer>
+</body>
+</html>

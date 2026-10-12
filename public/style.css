@@ -85,6 +85,8 @@ details p{margin:14px 0 0;color:var(--muted)}
 .policy th{color:var(--ink)}
 .policy td{color:var(--muted)}
 code{font-size:14px;overflow-wrap:anywhere}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;overflow-x:auto;font-size:13px;line-height:1.6;margin:0 0 18px}
+pre code{font-size:13px;overflow-wrap:normal;white-space:pre}
 .policy a{overflow-wrap:anywhere}
 @media(max-width:700px){h1{font-size:40px}h2{font-size:26px}.wrap{width:calc(100% - 32px)}.site-header .wrap{align-items:flex-start}.site-nav{gap:8px 16px;justify-content:flex-end}.product-name{gap:12px}.product-name img{width:48px;height:48px}.hero{padding-top:28px}.lede{font-size:18px}.hero-proof{margin-top:24px}.workflow,.features,.screenshots{grid-template-columns:1fr;gap:26px}.band{padding:36px 0}.policy h1{font-size:32px}.policy table th,.policy table td{padding:10px 6px}.policy th:first-child{width:36%}.footer .wrap{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

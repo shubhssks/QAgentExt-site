@@ -65,6 +65,7 @@
         <a href="#demo">Demo</a>
         <a href="#features">Features</a>
         <a href="#ios">iOS</a>
+        <a href="/cli/">CLI</a>
         <a href="/privacy/">Privacy</a>
         <a href="mailto:shubix.connect@gmail.com">Support</a>
       </nav>
@@ -106,7 +107,7 @@
         <p class="eyebrow">75-second walkthrough</p>
         <h2 id="demo-heading">Watch a real test take shape</h2>
         <p class="intro">Record a form, replay it, export the code, investigate a failed assertion and run two saved checks. The copied Playwright script was also executed independently.</p>
-        <p class="release-note">Recorded with version 2.1. The current release is 2.2; the Chrome Web Store listing shows the version available to install.</p>
+        <p class="release-note">Recorded with version 2.1. The current release is 2.3; the Chrome Web Store listing shows the version available to install.</p>
         <figure class="demo">
           <video controls playsinline preload="none" poster="/assets/video-thumbnail.png" width="1920" height="1080" aria-label="QAgentExt record, replay, debug and export demo">
             <source src="/assets/QAgentExt-2.1-demo.mp4" type="video/mp4">
@@ -136,8 +137,9 @@
           <article><h3>Evidence for the failed step</h3><p>Review the expected outcome, available screenshots, console messages and network diagnostics. Export reports and reproduction evidence for your team.</p></article>
           <article><h3>Live contrast inspection</h3><p>Hover over an element for its contrast ratio and text thresholds. Feedback updates as styles change; click to keep the detailed report.</p></article>
           <article><h3>Screen-reader semantics</h3><p>Inspect roles, names, descriptions and states using the pointer or keyboard. Inspection modes have active states and Escape cleanup.</p></article>
+          <article><h3>Text spacing (WCAG 1.4.12)</h3><p>A scanner rule applies the 1.4.12 values and reports text that clips or overlaps. An editor applies your own line height, letter, word and paragraph spacing live, keeps them on across pages, and toggles with Alt+Shift+S.</p></article>
           <article><h3>Page and API checks</h3><p>Combine supported plain-language commands and assertions with API requests, response checks, visual comparisons and accessibility diagnostics.</p></article>
-          <article><h3>Continue in CI</h3><p>The separately installed companion CLI runs supported regression plans in headless Chromium and exports JSON or JUnit results for your pipeline.</p></article>
+          <article><h3>Continue in CI</h3><p>The <a href="/cli/">companion CLI</a>, one installable package, runs saved tests, regression plans and iOS flows in headless Chromium with the same engine and exports JSON or JUnit results for your pipeline.</p></article>
         </div>
         <p class="fine-print">Sequential tests share browser state. Generated scripts need review, and export support varies by action and framework. Automated accessibility and security checks provide diagnostic findings; manual review is still needed.</p>
       </div>
