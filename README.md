@@ -35,6 +35,21 @@ Changed on the way:
 `public/assets/` is byte-for-byte the Shubix copy: screenshots and the demo
 video, captions and thumbnail from the 2.1 release.
 
+## Social card
+
+`public/assets/social-card.png` (1200 × 630) is the link preview for every
+page (Open Graph and Twitter tags, with alt text). Its source is
+`tools/social-card.html`, built from the site's palette, the extension icon and
+the real replay screenshot. To change it, edit the HTML and re-render with
+Playwright from the extension repository:
+
+```bash
+node tools/render-social-card.cjs D:/Workplace/QAgentExt
+```
+
+`tools/` is not published: Netlify serves only `public/`. Social sites cache
+previews, so after a change, re-scrape the URL in each site's preview debugger.
+
 ## Security headers
 
 `public/_headers` applies one policy to the whole site: its own files only
